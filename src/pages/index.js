@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
-import StaticBar from '../components/staticbar';
-import NavBar from '../components/navbar';
+import StaticBar from '../components/StaticBar';
+import NavBar from '../components/NavBar';
 
 export default function Home() {
   return (

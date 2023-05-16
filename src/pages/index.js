@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { handleRequest } from "../../commom/request";
+
 const columnNames = [
   { key: "productImage", title: "Image" },
   { key: "id", title: "ProductId" },
   { key: "productName", title: "Name" },
   { key: "productQuatity", title: "Quantity" },
   { key: false, title: "More" },
-];
-const datas = [
-  { img: "i2", id: "2", name: "baba", qty: "20" },
-  { img: "i3", id: "3", name: "nana", qty: "30" },
-  { img: "i4", id: "4", name: "haha", qty: "40" },
 ];
 
 export default function Home() {

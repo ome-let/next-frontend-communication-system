@@ -1,16 +1,22 @@
+import StaticBar from "../components/StaticBar";
+import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { handleRequest } from "../../commom/request";
 
-const columnNames = [
-  { key: "productImage", title: "Image" },
-  { key: "id", title: "ProductId" },
-  { key: "productName", title: "Name" },
-  { key: "productQuatity", title: "Quantity" },
-  { key: false, title: "More" },
-];
-
 export default function Home() {
+  const handleTabClick = (tab) => {
+    console.log("Tab clicked:", tab);
+  };
+
+  const columnNames = [
+    { key: "productImage", title: "Image" },
+    { key: "id", title: "ProductId" },
+    { key: "productName", title: "Name" },
+    { key: "productQuatity", title: "Quantity" },
+    { key: false, title: "More" },
+  ];
+
   const [products, setProducts] = useState([]);
   useEffect(() => {
     handleRequest({
@@ -19,11 +25,19 @@ export default function Home() {
     }).then((res) => setProducts(res.products));
   }, []);
 
-  console.log(products);
-
   return (
-    <div className="p-[50px]">
-      <Table datas={products} tableName="Products" columnNames={columnNames} />
+    <div>
+      <StaticBar />
+      <NavBar activeTab="product" onTabClick={handleTabClick} />
+      {/* Hello world!
+      <Button variant="contained" className='bg-black'>Contained</Button> */}
+      <div className="p-6">
+        <Table
+          datas={products}
+          tableName="Products"
+          columnNames={columnNames}
+        />
+      </div>
     </div>
   );
 }

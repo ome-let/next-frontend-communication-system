@@ -6,8 +6,7 @@ import { uploadImage } from "../function/uploader";
 import Swal from "sweetalert2";
 import { insertProduct } from "../function/product";
 
-export default function Popup({setLoading}) {
-  const [show, setShow] = useState(true)
+export default function Popup({ setDisplay, setLoading }) {
   const imageRef = useRef(null);
   const [imgUrl, setImgUrl] = useState("");
 
@@ -25,7 +24,7 @@ export default function Popup({setLoading}) {
       const img = imgUrl;
       const response = await insertProduct(name, id, description, img);
       setLoading(false);
-      setShow(false);
+      setDisplay(false);
       await Swal.fire({
         icon: "success",
         title: "Success!",
@@ -61,8 +60,14 @@ export default function Popup({setLoading}) {
     imageRef.current.click();
   };
 
+  const onDiscard = () => {
+    setDisplay(false);
+  };
+
   return (
-    <div className={`fixed bg-[#6E707560] w-full h-full z-0 top-0 left-0 flex justify-center items-center px-2 ${!show && "hidden"}`}>
+    <div
+      className={`fixed bg-[#6E707560] w-full h-full z-0 top-0 left-0 flex justify-center items-center px-2`}
+    >
       <div
         className="bg-white h-fit p-[30px] rounded-lg font-medium w-[500px]"
         data-aos="zoom-in"
@@ -140,8 +145,10 @@ export default function Popup({setLoading}) {
           />
 
           <div className="mt-[40px] flex justify-end gap-[10px]">
-            <div className="text-[#858D9D] text-[15px] border-[#D0D5DD] border-[1px] rounded-lg w-fit px-[14px] py-[8px] cursor-pointer"
-                 onClick={() => setShow(false)}>
+            <div
+              className="text-[#858D9D] text-[15px] border-[#D0D5DD] border-[1px] rounded-lg w-fit px-[14px] py-[8px] cursor-pointer"
+              onClick={onDiscard}
+            >
               Discard
             </div>
             <button

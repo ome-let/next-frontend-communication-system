@@ -3,11 +3,18 @@ import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { handleRequest } from "../../commom/request";
-import Popup from "../components/popup";
+import Popup from "../components/Popup";
 
-export default function Home({setLoading}) {
+export default function Home({ setLoading }) {
+  const [isCreate, setIsCreate] = useState(false);
+  const [products, setProducts] = useState([]);
+
   const handleTabClick = (tab) => {
     console.log("Tab clicked:", tab);
+  };
+
+  const handleCreate = () => {
+    setIsCreate(true);
   };
 
   const columnNames = [
@@ -18,7 +25,6 @@ export default function Home({setLoading}) {
     { key: false, title: "More" },
   ];
 
-  const [products, setProducts] = useState([]);
   useEffect(() => {
     handleRequest({
       path: "https://backend.ome-let.online/products?getAll=true",
@@ -29,9 +35,11 @@ export default function Home({setLoading}) {
   return (
     <div>
       <StaticBar />
-      <NavBar activeTab="product" onTabClick={handleTabClick} />
-      {/* Hello world!
-      <Button variant="contained" className='bg-black'>Contained</Button> */}
+      <NavBar
+        activeTab="product"
+        onTabClick={handleTabClick}
+        onAddProduct={handleCreate}
+      />
       <div className="p-6">
         <Table
           datas={products}
@@ -39,7 +47,7 @@ export default function Home({setLoading}) {
           columnNames={columnNames}
         />
       </div>
-      <Popup show={true} setLoading={setLoading} />
+      {isCreate && <Popup setDisplay={setIsCreate} setLoading={setLoading} />}
     </div>
   );
 }

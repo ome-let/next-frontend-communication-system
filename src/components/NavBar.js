@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import InventoryIcon from "@mui/icons-material/InventoryOutlined";
 import HistoryIcon from "@mui/icons-material/History";
 
-function NavBar() {
-  const [activeTab, setActiveTab] = useState("product");
+function NavBar(props) {
+  const { activeTab } = props;
 
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    props.onTabClick(tab);
   };
 
   return (
@@ -16,50 +16,42 @@ function NavBar() {
         <div className="flex justify-center">
           <div
             className={`w-1/2 h-12 rounded-t-lg ${
-              activeTab === "product" ? "bg-white" : "bg-[#1366D933]"
-            } flex items-center justify-center mx-2 cursor-pointer transition-colors duration-300 ${
-              activeTab !== "product" && "hover:bg-[#E5E5E5]"
-            }`}
+              activeTab === "product"
+                ? "bg-white"
+                : "bg-[#1366D933] hover:bg-[#E5E5E5]"
+            } flex items-center justify-center mx-2 cursor-pointer transition-colors duration-300`}
             onClick={() => handleTabClick("product")}
           >
             <InventoryIcon
               className={`${
-                activeTab === "product"
-                  ? "text-black font-medium text-sm"
-                  : "text-[#1F222ACC] font-medium text-sm"
-              } mr-2`}
+                activeTab === "product" ? "text-black" : "text-[#1F222ACC]"
+              } mr-2  font-medium text-sm`}
             />
             <span
               className={`${
-                activeTab === "product"
-                  ? "text-black font-medium text-sm"
-                  : "text-[#1F222ACC] font-medium text-sm"
-              } font-medium`}
+                activeTab === "product" ? "text-black" : "text-[#1F222ACC]"
+              } font-medium text-sm`}
             >
               Product
             </span>
           </div>
           <div
             className={`w-1/2 h-12 rounded-t-lg ${
-              activeTab === "history" ? "bg-white" : "bg-[#1366D933]"
-            } flex items-center justify-center mx-2 cursor-pointer transition-colors duration-300 ${
-              activeTab !== "history" && "hover:bg-[#E5E5E5]"
-            }`}
+              activeTab === "history"
+                ? "bg-white"
+                : "bg-[#1366D933] hover:bg-[#E5E5E5]"
+            } flex items-center justify-center mx-2 cursor-pointer transition-colors duration-300`}
             onClick={() => handleTabClick("history")}
           >
             <HistoryIcon
               className={`${
-                activeTab === "history"
-                  ? "text-black font-medium text-sm"
-                  : "text-[#1F222ACC] font-medium text-sm"
-              } mr-2`}
+                activeTab === "history" ? "text-black" : "text-[#1F222ACC]"
+              } mr-2  font-medium text-sm`}
             />
             <span
               className={`${
-                activeTab === "history"
-                  ? "text-black font-medium text-sm"
-                  : "text-[#1F222ACC] font-medium text-sm"
-              } font-medium`}
+                activeTab === "history" ? "text-black" : "text-[#1F222ACC]"
+              } font-medium text-sm`}
             >
               History
             </span>

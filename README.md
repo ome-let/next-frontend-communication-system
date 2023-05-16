@@ -6,7 +6,7 @@
 ## 😶‍🌫️ Installation Guide
 
 **Environment ที่สำคัญ** 
-- node ^v.16.0.0 
+- node ^v.17.0.0 
 - npm ^v.8.0.0
 
 **Devolopment**

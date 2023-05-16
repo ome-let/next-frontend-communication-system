@@ -29,7 +29,26 @@ export default function Home({ setLoading }) {
     handleRequest({
       path: "https://backend.ome-let.online/products?getAll=true",
       method: "get",
-    }).then((res) => setProducts(res.products));
+    }).then((res) => {
+      const products = res.products;
+      const listProduct = [];
+      products.forEach((product) => {
+        listProduct.push({
+          id: product.id,
+          productName: product.productName,
+          productQuatity: product.productQuatity,
+          productImage: product.productImage ? (
+            <img
+              src={product.productImage}
+              className="w-[40px] h-[40px] object-cover"
+            />
+          ) : (
+            ""
+          ),
+        });
+      });
+      setProducts(listProduct);
+    });
   }, []);
 
   return (

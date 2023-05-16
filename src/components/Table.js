@@ -22,7 +22,7 @@ export default function Table({
       <table className="w-full">
         <tbody className="flex flex-col justify-center">
           {datas.map((data, index) => (
-            <tr className="grid grid-cols-5 py-4 border-b border-gray-300">
+            <tr className="grid grid-cols-5 py-4 border-b border-gray-300" key={index}>
               {columnNames.map((label, index) => (
                 <td key={index}>
                   {label.key ? (

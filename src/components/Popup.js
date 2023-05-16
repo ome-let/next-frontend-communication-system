@@ -16,8 +16,8 @@ export default function Popup({ setDisplay, setLoading }) {
 
   const actionAddProduct = async (e) => {
     try {
-      setLoading(true);
       e.preventDefault();
+      setLoading(true);
       const name = e.target.name.value;
       const id = e.target.id.value;
       const description = e.target.description.value;

@@ -1,8 +1,10 @@
+import { useState } from "react";
 import "../styles/globals.css";
 import Head from "next/head";
-
+import Loading from "../components/Loading";
 
 export default function App({ Component, pageProps }) {
+  const [loading, setLoading] = useState(false)
   return (
     <>
       <Head>
@@ -11,7 +13,10 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div>
-        <Component {...pageProps} />
+        {
+          loading && <Loading />
+        }
+        <Component {...pageProps} setLoading={setLoading} />
       </div>
     </>
   );

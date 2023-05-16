@@ -3,8 +3,9 @@ import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { handleRequest } from "../../commom/request";
+import Popup from "../components/popup";
 
-export default function Home() {
+export default function Home({setLoading}) {
   const handleTabClick = (tab) => {
     console.log("Tab clicked:", tab);
   };
@@ -38,6 +39,7 @@ export default function Home() {
           columnNames={columnNames}
         />
       </div>
+      <Popup show={true} setLoading={setLoading} />
     </div>
   );
 }

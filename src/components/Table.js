@@ -1,6 +1,6 @@
 import { Button, IconButton, Tooltip } from "@mui/material";
 import React from "react";
-import SearchIcon from "../public/svgs/SearchIcon";
+import SearchIcon from "./svg/SearchIconSvg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import TableHeader from "./TableHeader";
 

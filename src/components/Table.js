@@ -1,7 +1,6 @@
-import { Button, IconButton, Tooltip, Menu, MenuItem } from "@mui/material";
-import 'tailwindcss/tailwind.css';
-import * as React from "react";
-import SearchIcon from "../public/svgs/SearchIcon";
+import { Button, IconButton, Menu } from "@mui/material";
+import React from "react";
+import SearchIcon from "./svg/SearchIconSvg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import TableHeader from "./TableHeader";
 import Penedit from '../public/svgs/Penedit'
@@ -35,7 +34,7 @@ export default function Table({
       <table className="w-full">
         <tbody className="flex flex-col justify-center">
           {datas.map((data, index) => (
-            <tr className="grid grid-cols-5 py-4 border-b border-gray-300">
+            <tr className="grid grid-cols-5 py-4 border-b border-gray-300" key={index}>
               {columnNames.map((label, index) => (
                 <td key={index}>
                   {label.key ? (

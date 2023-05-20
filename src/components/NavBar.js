@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import InventoryIcon from "@mui/icons-material/InventoryOutlined";
 import HistoryIcon from "@mui/icons-material/History";
 
-function NavBar({activeTab, onTabClick, onAddProduct}) {
+function NavBar({ activeTab, onTabClick, onAddProduct }) {
   const handleTabClick = (tab) => {
     onTabClick(tab);
   };

@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { handleRequest } from "../../commom/request";
 import Popup from "../components/Popup";
+import { useRouter } from "next/router";
 
 export default function Home({ setLoading }) {
+  const router = useRouter();
   const [isCreate, setIsCreate] = useState(false);
   const [products, setProducts] = useState([]);
 
-  const handleTabClick = (tab) => {
-    console.log("Tab clicked:", tab);
+  const handleTabClick = () => {
+    router.push("/history");
   };
 
   const handleCreate = () => {
@@ -59,7 +61,7 @@ export default function Home({ setLoading }) {
         onTabClick={handleTabClick}
         onAddProduct={handleCreate}
       />
-      <div className="p-6">
+      <div className="px-6">
         <Table
           datas={products}
           tableName="Products"

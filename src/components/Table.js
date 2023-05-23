@@ -1,23 +1,43 @@
 import { Button, IconButton, Menu } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import SearchIcon from "./svg/SearchIconSvg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import TableHeader from "./TableHeader";
 import Penedit from "../public/svgs/Penedit";
 import BinDel from "../public/svgs/BinDel";
+import { handleRequest } from "../../commom/request";
+import Swal from "sweetalert2";
+const config = require("../../src/config.json");
 
 export default function Table({
   datas = [],
   tableName = "",
   columnNames = [],
 }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [productId, setProductId] = useState("");
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
+    setProductId(id);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleClickDelete = async (id) => {
+    try {
+      await handleRequest({
+        path: config.backend + `/delete-product/${id}`,
+        method: "delete",
+      });
+      await window.location.reload();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: error.message,
+      });
+    }
   };
 
   return (
@@ -38,63 +58,70 @@ export default function Table({
       <table className="w-full">
         <tbody className="flex flex-col justify-center">
           {datas.map((data, index) => (
-            <tr
-              className="grid grid-cols-5 gap-2 py-4 border-b border-gray-300 "
-              key={index}
-            >
-              {columnNames.map((label, index) => (
-                <td key={index}>
-                  {label.key === "productImage" ? (
-                    <img
-                      src={data[label.key]}
-                      className="w-[40px] h-[40px] object-cover"
-                    />
-                  ) : label.key ? (
-                    <div className="text-xs tablet:text-sm  whitespace-nowrap overflow-hidden overflow-ellipsis">
-                      {data[label.key]}
-                    </div>
-                  ) : (
-                    <div>
-                      <IconButton
-                        id="basic-button"
-                        aria-controls={open ? "basic-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        onClick={handleClick}
-                      >
-                        <MoreVertIcon fontSize="small" />
-                      </IconButton>
-                      <Menu
-                        className="border-none shadow-none"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                      >
-                        <div
-                          onClick={handleClose}
-                          className="border border-gray-300  py-[5px] flex flex-col w-[96px] "
+            <>
+              <tr
+                className="grid grid-cols-5 gap-2 py-4 border-b border-gray-300 "
+                key={index}
+              >
+                {columnNames.map((label, index) => (
+                  <td key={index}>
+                    {label.key === "productImage" ? (
+                      <img
+                        src={data[label.key]}
+                        className="w-[40px] h-[40px] object-cover"
+                      />
+                    ) : label.key ? (
+                      <div className="text-xs tablet:text-sm  whitespace-nowrap overflow-hidden overflow-ellipsis">
+                        {data[label.key]}
+                      </div>
+                    ) : (
+                      <div>
+                        <IconButton
+                          id={data.id}
+                          aria-controls={open ? "basic-menu" : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
+                          onClick={(event) => handleClick(event, data.id)}
                         >
-                          <div class="flex flex-col w-[94px] ">
-                            <div className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer">
-                              <p class="pl-1 ">
-                                <Penedit />{" "}
-                              </p>{" "}
-                              <p>Edit </p>
-                            </div>
-                            <div className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer">
-                              <p class="pl-1">
-                                <BinDel />
-                              </p>{" "}
-                              <p class="pb-[1px]">Delete </p>
+                          <MoreVertIcon fontSize="small" />
+                        </IconButton>
+                        <Menu
+                          className="border-none shadow-none"
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleClose}
+                        >
+                          <div
+                            onClick={handleClose}
+                            className="border border-gray-300  py-[5px] flex flex-col w-[96px] rounded-md	text-[#667085]"
+                          >
+                            <div class="flex flex-col w-[94px] ">
+                              <div className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer">
+                                <p class="pl-1 ">
+                                  <Penedit />{" "}
+                                </p>{" "}
+                                <p>Edit </p>
+                              </div>
+                              <div className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer">
+                                <p class="pl-1">
+                                  <BinDel />
+                                </p>{" "}
+                                <p
+                                  class="pb-[1px]"
+                                  onClick={() => handleClickDelete(productId)}
+                                >
+                                  Delete
+                                </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Menu>
-                    </div>
-                  )}
-                </td>
-              ))}
-            </tr>
+                        </Menu>
+                      </div>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            </>
           ))}
         </tbody>
       </table>

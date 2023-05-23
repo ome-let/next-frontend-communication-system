@@ -10,6 +10,7 @@ export default function Home({ setLoading }) {
   const router = useRouter();
   const [isCreate, setIsCreate] = useState(false);
   const [products, setProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState(0);
 
   const handleTabClick = () => {
     router.push("/history");
@@ -43,6 +44,7 @@ export default function Home({ setLoading }) {
         activeTab="product"
         onTabClick={handleTabClick}
         onAddProduct={handleCreate}
+        totalProducts={totalProducts}
       />
       <div className="px-2 tablet:px-4">
         <Table

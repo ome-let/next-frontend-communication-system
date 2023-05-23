@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import InventoryIcon from "@mui/icons-material/InventoryOutlined";
 import HistoryIcon from "@mui/icons-material/History";
 
-function NavBar({ activeTab, onTabClick, onAddProduct }) {
+function NavBar({ activeTab, onTabClick, onAddProduct, totalProducts }) {
   const handleTabClick = (tab) => {
     onTabClick(tab);
   };
@@ -65,8 +65,8 @@ function NavBar({ activeTab, onTabClick, onAddProduct }) {
                 <p className="ml-5 font-medium text-sm tablet:text-base text-[#E19133]">
                   Total Products
                 </p>
-                <p className="ml-5 font-medium text-sm tablet:text-base text-[#5D6679]">
-                  99999
+                <p className="ml-5 font-medium text-sm text-[#5D6679]">
+                  {totalProducts ?? 0}
                 </p>
               </div>
               <div className="mr-5 w-1/2 flex justify-end">

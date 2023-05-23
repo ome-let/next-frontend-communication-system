@@ -8,6 +8,7 @@ import Popup from "../components/Popup";
 export default function Home({ setLoading }) {
   const [isCreate, setIsCreate] = useState(false);
   const [products, setProducts] = useState([]);
+  const [totalProducts, setTotalProducts] = useState(0);
 
   const handleTabClick = (tab) => {
     console.log("Tab clicked:", tab);
@@ -30,7 +31,9 @@ export default function Home({ setLoading }) {
       path: "https://backend.ome-let.online/products?getAll=true",
       method: "get",
     }).then((res) => {
+      setTotalProducts(res.allProducts);
       const products = res.products;
+
       const listProduct = [];
       products.forEach((product) => {
         listProduct.push({
@@ -58,6 +61,7 @@ export default function Home({ setLoading }) {
         activeTab="product"
         onTabClick={handleTabClick}
         onAddProduct={handleCreate}
+        totalProducts={totalProducts}
       />
       <div className="p-6">
         <Table

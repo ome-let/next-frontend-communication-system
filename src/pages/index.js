@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { handleRequest } from "../../commom/request";
 import Popup from "../components/Popup";
+import { useRouter } from "next/router";
 
 export default function Home({ setLoading }) {
+  const router = useRouter();
   const [isCreate, setIsCreate] = useState(false);
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(0);
 
-  const handleTabClick = (tab) => {
-    console.log("Tab clicked:", tab);
+  const handleTabClick = () => {
+    router.push("/history");
   };
 
   const handleCreate = () => {
@@ -31,26 +33,7 @@ export default function Home({ setLoading }) {
       path: "https://backend.ome-let.online/products?getAll=true",
       method: "get",
     }).then((res) => {
-      setTotalProducts(res.allProducts);
-      const products = res.products;
-
-      const listProduct = [];
-      products.forEach((product) => {
-        listProduct.push({
-          id: product.id,
-          productName: product.productName,
-          productQuatity: product.productQuatity,
-          productImage: product.productImage ? (
-            <img
-              src={product.productImage}
-              className="w-[40px] h-[40px] object-cover"
-            />
-          ) : (
-            ""
-          ),
-        });
-      });
-      setProducts(listProduct);
+      setProducts(res.products);
     });
   }, []);
 
@@ -63,7 +46,7 @@ export default function Home({ setLoading }) {
         onAddProduct={handleCreate}
         totalProducts={totalProducts}
       />
-      <div className="p-6">
+      <div className="px-2 tablet:px-4">
         <Table
           datas={products}
           tableName="Products"

@@ -10,14 +10,14 @@ function NavBar({ activeTab, onTabClick, onAddProduct, totalProducts }) {
 
   return (
     <div>
-      <div className="px-4 pt-6">
-        <div className="flex justify-center">
+      <div className="px-2 pt-4 tablet:pt-6 tablet:px-4">
+        <div className="flex justify-center gap-4 tablet:gap-6">
           <div
             className={`w-1/2 h-12 rounded-t-lg ${
               activeTab === "product"
                 ? "bg-white"
                 : "bg-[#1366D933] hover:bg-[#E5E5E5]"
-            } flex items-center justify-center mx-2 cursor-pointer transition-colors duration-300`}
+            } flex items-center justify-center  cursor-pointer transition-colors duration-300`}
             onClick={() => handleTabClick("product")}
           >
             <InventoryIcon
@@ -38,7 +38,7 @@ function NavBar({ activeTab, onTabClick, onAddProduct, totalProducts }) {
               activeTab === "history"
                 ? "bg-white"
                 : "bg-[#1366D933] hover:bg-[#E5E5E5]"
-            } flex items-center justify-center mx-2 cursor-pointer transition-colors duration-300`}
+            } flex items-center justify-center cursor-pointer transition-colors duration-300`}
             onClick={() => handleTabClick("history")}
           >
             <HistoryIcon
@@ -58,11 +58,11 @@ function NavBar({ activeTab, onTabClick, onAddProduct, totalProducts }) {
       </div>
 
       {activeTab === "product" && (
-        <div className="px-6">
-          <div className="bg-white p-7 shadow-xl">
+        <div className="px-2 tablet:px-4">
+          <div className="bg-white p-4 shadow-xl tablet:p-6 ">
             <div className="flex justify-between">
               <div className="w-1/2">
-                <p className="ml-5 font-medium text-sm text-[#E19133]">
+                <p className="ml-5 font-medium text-sm tablet:text-base text-[#E19133]">
                   Total Products
                 </p>
                 <p className="ml-5 font-medium text-sm text-[#5D6679]">

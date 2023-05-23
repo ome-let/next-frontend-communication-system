@@ -5,7 +5,9 @@ import HistoryIcon from "@mui/icons-material/History";
 
 function NavBar({ activeTab, onTabClick, onAddProduct, totalProducts }) {
   const handleTabClick = (tab) => {
-    onTabClick(tab);
+    if(activeTab != tab){
+      onTabClick(tab);
+    }
   };
 
   return (

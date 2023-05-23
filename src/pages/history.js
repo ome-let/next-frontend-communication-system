@@ -25,7 +25,27 @@ export default function History({ setLoading }) {
     handleRequest({
       path: config.backend + "/products-history?getAll=true&filter=dateTime",
       method: "get",
-    }).then((res) => setProductHistory(res.productHistory));
+    }).then((res) => {
+      let historyArray = res.productHistory
+      historyArray = historyArray.map(history=>{
+        let status 
+        if(history.status =="IN_STOCK"){
+          status = (
+            <p className="text-[#4CA467]">IN</p>
+          )
+        }
+        else{
+          status = (
+            <p className="text-[#CA4A3C]">Out</p>
+          )
+        }
+        return{
+          ...history,
+          status
+        }
+      })
+      setProductHistory(historyArray)
+    });
   }, []);
   return (
     <div>

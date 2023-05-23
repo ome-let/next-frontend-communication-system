@@ -16,6 +16,21 @@ const insertProduct = async (name, productId, description="", imgUrl="") => {
     }
 }
 
+const updateProduct = async (productId, productName, description="", imgUrl="") => {
+    try {
+        const path = config.backend + "/update-product/" + productId;
+        const res = await axios.put(path, {
+            "productName": productName,
+            "productDescription": description,
+            "productImage": imgUrl
+        });
+        return Promise.resolve(res.data);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
+
 module.exports = {
-    insertProduct
+    insertProduct,
+    updateProduct
 }

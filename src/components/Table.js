@@ -39,7 +39,12 @@ export default function Table({
             >
               {columnNames.map((label, index) => (
                 <td key={index}>
-                  {label.key ? (
+                  {label.key === "productImage" ? (
+                    <img
+                      src={data[label.key]}
+                      className="w-[40px] h-[40px] object-cover"
+                    />
+                  ) : label.key ? (
                     data[label.key]
                   ) : (
                     <div>

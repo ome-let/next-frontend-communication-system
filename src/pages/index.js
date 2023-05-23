@@ -44,7 +44,7 @@ export default function Home({ setLoading }) {
         onTabClick={handleTabClick}
         onAddProduct={handleCreate}
       />
-      <div className="px-6">
+      <div className="px-2 tablet:px-4">
         <Table
           datas={products}
           tableName="Products"

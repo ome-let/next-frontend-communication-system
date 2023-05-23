@@ -22,11 +22,16 @@ export default function Table({
 
   return (
     <div className="p-7 text-[#48505E] bg-white rounded-br-xl rounded-bl-xl	">
-      <div className="flex justify-between">
-        <div className="text-[#383E49] text-xl font-medium	">{tableName}</div>
-        <div className="mr-6 flex border border-[#1366D9] items-center p-2 rounded gap-2">
+      <div className="flex justify-between ">
+        <div className="text-[#383E49] text-lg tablet:text-xl font-medium	">
+          {tableName}
+        </div>
+        <div className="tablet:mr-6 flex border border-[#1366D9] items-center p-2 rounded gap-2 h-fit">
           <SearchIcon />
-          <input placeholder="search product" style={{ color: "#1366D9" }} />
+          <input
+            placeholder="search product"
+            className=" placeholder-[#1366D9] text-[#1366D9] text-xs tablet:text-sm"
+          />
         </div>
       </div>
       <TableHeader columnNames={columnNames} />
@@ -34,7 +39,7 @@ export default function Table({
         <tbody className="flex flex-col justify-center">
           {datas.map((data, index) => (
             <tr
-              className="grid grid-cols-5 py-4 border-b border-gray-300"
+              className="grid grid-cols-5 gap-2 py-4 border-b border-gray-300 "
               key={index}
             >
               {columnNames.map((label, index) => (
@@ -45,7 +50,9 @@ export default function Table({
                       className="w-[40px] h-[40px] object-cover"
                     />
                   ) : label.key ? (
-                    data[label.key]
+                    <div className="text-xs tablet:text-sm  whitespace-nowrap overflow-hidden overflow-ellipsis">
+                      {data[label.key]}
+                    </div>
                   ) : (
                     <div>
                       <IconButton
@@ -55,7 +62,7 @@ export default function Table({
                         aria-expanded={open ? "true" : undefined}
                         onClick={handleClick}
                       >
-                        <MoreVertIcon fontSize="inherit" />
+                        <MoreVertIcon fontSize="small" />
                       </IconButton>
                       <Menu
                         className="border-none shadow-none"

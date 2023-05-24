@@ -34,6 +34,7 @@ export default function Home({ setLoading }) {
       method: "get",
     }).then((res) => {
       setProducts(res.products);
+      setTotalProducts(res.allProducts);
     });
   }, []);
 
@@ -52,6 +53,7 @@ export default function Home({ setLoading }) {
           tableName="Products"
           columnNames={columnNames}
           setLoading={setLoading}
+          isCanEditClick={true}
         />
       </div>
       {isCreate && <Popup setDisplay={setIsCreate} setLoading={setLoading} />}

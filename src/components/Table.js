@@ -8,20 +8,27 @@ import BinDel from "../public/svgs/BinDel";
 import { handleRequest } from "../../commom/request";
 import Swal from "sweetalert2";
 const config = require("../../src/config.json");
+import PopupEdit from "./PopupEdit";
 
 export default function Table({
   datas = [],
   tableName = "",
   columnNames = [],
   setLoading = (loading) => {},
+  isCanEditClick = false,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [productId, setProductId] = useState("");
+  const [displayEdit, setDisplayEdit] = useState(false);
+  const [dataEdit, setDataEdit] = useState(null);
+  const [mode, setMode] = useState("read");
   const open = Boolean(anchorEl);
+
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
     setProductId(id);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -47,8 +54,31 @@ export default function Table({
     }
   };
 
+  const handleEdit = () => {
+    const data = datas.filter((d) => d.id == productId)[0];
+    editClick(data, "edit", "edit");
+  };
+
+  const editClick = (data, label, mode = "read") => {
+    console.log(data, label);
+    if (!label || !isCanEditClick) {
+      return;
+    }
+    setDisplayEdit(true);
+    setDataEdit(data);
+    setMode(mode);
+  };
+
   return (
     <>
+      {displayEdit && (
+        <PopupEdit
+          setDisplay={setDisplayEdit}
+          setLoading={setLoading}
+          data={dataEdit}
+          isEdit={mode == "edit"}
+        />
+      )}
       <div className="p-7 text-[#48505E] bg-white rounded-br-xl rounded-bl-xl	">
         <div className="flex justify-between ">
           <div className="text-[#383E49] text-lg tablet:text-xl font-medium	">
@@ -72,7 +102,7 @@ export default function Table({
                   key={index}
                 >
                   {columnNames.map((label, index) => (
-                    <td key={index}>
+                    <td key={index} onClick={() => editClick(data, label.key)}>
                       {label.key === "productImage" ? (
                         <img
                           src={data[label.key]}
@@ -104,22 +134,23 @@ export default function Table({
                               className="border border-gray-300  py-[5px] flex flex-col w-[96px] rounded-md	text-[#667085]"
                             >
                               <div class="flex flex-col w-[94px] ">
-                                <div className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer">
+                                <div
+                                  className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer"
+                                  onClick={handleEdit}
+                                >
                                   <p class="pl-1 ">
                                     <Penedit />{" "}
                                   </p>{" "}
                                   <p>Edit </p>
                                 </div>
-                                <div className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer">
+                                <div
+                                  className="flex items-center gap-2 p-2 bg-white hover:bg-[#E5E5E5] cursor-pointer"
+                                  onClick={handleClickDelete}
+                                >
                                   <p class="pl-1">
                                     <BinDel />
                                   </p>{" "}
-                                  <p
-                                    class="pb-[1px]"
-                                    onClick={handleClickDelete}
-                                  >
-                                    Delete
-                                  </p>
+                                  <p class="pb-[1px]">Delete</p>
                                 </div>
                               </div>
                             </div>

@@ -41,7 +41,8 @@ export default function History({ setLoading }) {
         }
         return{
           ...history,
-          status
+          status,
+          statusString: history.status
         }
       })
       setProductHistory(historyArray)
@@ -56,6 +57,7 @@ export default function History({ setLoading }) {
           datas={productHistory}
           tableName="History of Products"
           columnNames={columnNames}
+          keySearch={["productId", "productName", "statusString"]}
         />
       </div>
     </div>

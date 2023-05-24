@@ -54,6 +54,7 @@ export default function Home({ setLoading }) {
           columnNames={columnNames}
           setLoading={setLoading}
           isCanEditClick={true}
+          keySearch={["id", "productName", "productQuatity"]}
         />
       </div>
       {isCreate && <Popup setDisplay={setIsCreate} setLoading={setLoading} />}

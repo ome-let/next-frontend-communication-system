@@ -34,7 +34,7 @@ export default function Home({ setLoading }) {
       method: "get",
     }).then((res) => {
       setProducts(res.products);
-      setTotalProducts(res.allProducts)
+      setTotalProducts(res.allProducts);
     });
   }, []);
 

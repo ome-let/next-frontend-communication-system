@@ -51,6 +51,7 @@ export default function Home({ setLoading }) {
           datas={products}
           tableName="Products"
           columnNames={columnNames}
+          setLoading={setLoading}
         />
       </div>
       {isCreate && <Popup setDisplay={setIsCreate} setLoading={setLoading} />}

@@ -61,7 +61,7 @@ function NavBar({ activeTab, onTabClick, onAddProduct, totalProducts }) {
 
       {activeTab === "product" && (
         <div className="px-2 tablet:px-4">
-          <div className="bg-white p-4 shadow-xl tablet:p-6 ">
+          <div className="bg-white p-4  tablet:p-6 ">
             <div className="flex justify-between">
               <div className="w-1/2">
                 <p className="ml-5 font-medium text-sm tablet:text-base text-[#E19133]">

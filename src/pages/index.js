@@ -55,6 +55,7 @@ export default function Home({ setLoading }) {
           setLoading={setLoading}
           isCanEditClick={true}
           keySearch={["id", "productName", "productQuatity"]}
+          className="my-[20px] rounded-[10px] "
         />
       </div>
       {isCreate && <Popup setDisplay={setIsCreate} setLoading={setLoading} />}

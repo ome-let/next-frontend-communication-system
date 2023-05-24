@@ -52,7 +52,7 @@ export default function History({ setLoading }) {
     <div>
       <StaticBar />
       <NavBar activeTab="history" onTabClick={handleTabClick} />
-      <div className="px-2 tablet:px-4">
+      <div className="px-2 tablet:px-4 ">
         <Table
           datas={productHistory}
           tableName="History of Products"

@@ -17,6 +17,7 @@ export default function Table({
   setLoading = (loading) => {},
   isCanEditClick = false,
   keySearch = [],
+  className = ""
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [productId, setProductId] = useState("");
@@ -118,7 +119,7 @@ export default function Table({
           isEdit={mode == "edit"}
         />
       )}
-      <div className="p-7 text-[#48505E] bg-white rounded-br-xl rounded-bl-xl	">
+      <div className={`p-7 text-[#48505E] bg-white rounded-br-xl rounded-bl-xl ${className}`}>
         <div className="flex justify-between ">
           <div className="text-[#383E49] text-lg tablet:text-xl font-medium	">
             {tableName}
